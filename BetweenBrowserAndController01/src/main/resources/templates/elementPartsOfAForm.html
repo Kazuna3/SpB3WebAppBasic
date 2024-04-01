@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>フォームの要素部品。Element parts of a form.</title>
+</head>
+<body>
+	<form method="post" action="/firstHandler" th:object="${inputOutputForm}">
+		<input type="text" th:field="*{textBox}" value="テキストボックスのデフォルト値">
+		<input type="submit" value="送信">
+		<!-- 
+		<input type="password">
+		<input type="radio">
+		<input type="checkbox">
+		<input type="hidden">
+		<input type="submit">
+		<input type="button">
+		<select>
+			<option></option>
+		</select>
+		<button></button>
+		 -->
+	</form>
+</body>
+</html>
