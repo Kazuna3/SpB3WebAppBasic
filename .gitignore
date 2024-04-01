@@ -1,5 +1,10 @@
+# 次行の URL は、［.gitignore］の設定方法として、参照しているサイトである。
+# https://yonehub.y10e.com/2019/12/24/20191223_git_gitignore/
 /.metadata
 /Servers
-/Hello/.mvn
-/Hello/mvnw
-/Hello/mvnw.cmd
+#/Hello/.mvn
+#/Hello/mvnw
+#/Hello/mvnw.cmd
+**/.mvn
+**/mvnw
+**/mvnw.cmd
