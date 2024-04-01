@@ -7,20 +7,89 @@
 </head>
 <body>
 	<form method="post" action="/firstHandler" th:object="${inputOutputForm}">
-		<input type="text" th:field="*{textBox}" value="テキストボックスのデフォルト値">
-		<input type="submit" value="送信">
+		<div>標準テキストボックス</div>
+		<div>
+			<input type="text" th:field="*{textBox}" value="テキストボックスのデフォルト値">
+		</div>
+		<hr>
+		<div>パスワード用テキストボックス</div>
+		<div>
+			<input type="password" th:field="*{passWord}">
+		</div>
+		<hr>
+		<div>ラジオボタン１</div>
+		<div>
+			<input type="radio" th:field="*{radioBtn1}" value="1">
+			選択肢１（初期選択項目）
+		</div>
+		<div>
+			<input type="radio" th:field="*{radioBtn1}" value="2">
+			選択肢２
+		</div>
+		<div>
+			<input type="radio" th:field="*{radioBtn1}" value="3">
+			選択肢３
+		</div>
+		<hr>
+		<div>ラジオボタン２</div>
+		<div>
+			<input type="radio" th:field="*{radioBtn2}" value="1">
+			選択肢１
+		</div>
+		<div>
+			<input type="radio" th:field="*{radioBtn2}" value="2">
+			選択肢２
+		</div>
+		<div>
+			<input type="radio" th:field="*{radioBtn2}" value="3">
+			選択肢３
+		</div>
+		<hr>
+		<div>チェックボックス１</div>
+		<input type="checkbox" th:field="*{checkbox1}" value="1">
+		選択肢１
+		<hr>
+		<div>チェックボックス２</div>
+		<div>複数のチェックボックスをOnにして送信ボタンを押下しても選択したチェックボックスにチェックが入る。</div>
+		<div>上の理由は、文字列型の配列を使用している為。</div>
+		<div>
+			<input type="checkbox" th:field="*{checkbox2}" value="1">
+			選択肢１（初期選択項目）
+		</div>
+		<div>
+			<input type="checkbox" th:field="*{checkbox2}" value="2">
+			選択肢２
+		</div>
+		<div>
+			<input type="checkbox" th:field="*{checkbox2}" value="3">
+			選択肢３
+		</div>
+		<hr>
+		<div>チェックボックス３</div>
+		<div>複数のチェックボックスをOnにして送信ボタンを押下すると、選択したチェックボックスのチェックが消える。</div>
+		<div>上の理由は、文字列型を使用している為。</div>
+		<div>
+			<input type="checkbox" th:field="*{checkbox3}" value="1">
+			選択肢１
+		</div>
+		<div>
+			<input type="checkbox" th:field="*{checkbox3}" value="2">
+			選択肢２
+		</div>
+		<div>
+			<input type="checkbox" th:field="*{checkbox3}" value="3">
+			選択肢３
+		</div>
+		<hr>
 		<!-- 
-		<input type="password">
-		<input type="radio">
-		<input type="checkbox">
 		<input type="hidden">
-		<input type="submit">
 		<input type="button">
 		<select>
 			<option></option>
 		</select>
 		<button></button>
 		 -->
+		<input type="submit" value="送信">
 	</form>
 </body>
 </html>
