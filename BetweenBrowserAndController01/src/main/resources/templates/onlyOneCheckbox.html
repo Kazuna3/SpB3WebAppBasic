@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>チェックボックスとボタンが１つづつの画面</title>
+</head>
+<body>
+	<form method="post" action="/onlyOneCheckbox" th:object="${checkBoxForm}">
+		<div>チェックボックス１</div>
+		<input type="checkbox" th:field="*{checkbox1}" value="1">
+		選択肢１
+		<hr>
+		<input type="submit" value="送信">
+	</form>
+</body>
+</html>

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.howToLinkData.form.CheckBoxForm;
 import com.example.howToLinkData.form.InputOutputForm;
 
 @Controller
@@ -17,12 +18,13 @@ public class BetweenBrowserAndController {
 		@ModelAttribute InputOutputForm inOutF
 	) {
 
+		// 初期値を設定する。
 		inOutF.setTextBox("初期値");
 
+		// 初期値を設定する。
 		// パスワードには、何も値を設定できないみたい・・・
 		inOutF.setPassWord("初期値");
 
-		// html の radio の checked 属性が、無視される為、
 		// ラジオボタンの初期選択を設定する。
 		inOutF.setRadioBtn1("1");
 
@@ -31,6 +33,12 @@ public class BetweenBrowserAndController {
 		// inOutF.setCheckbox2(strArray);
 		// 次行は、上２行と同じ処理である。
 		inOutF.setCheckbox2(new String[] { "1" });
+
+		// セレクトボックスの初期選択を設定する。
+		inOutF.setSelectBox1("1");
+
+		// テキストエリアの初期値を設定する。
+		// inOutF.setTextArea1("テキストエリアの初期値");
 
 		return "elementPartsOfAForm";
 
@@ -71,5 +79,57 @@ public class BetweenBrowserAndController {
 		return "elementPartsOfAForm";
 
 	}
+
+	// http://localhost:8080/onlyOneCheckbox
+	@GetMapping("/onlyOneCheckbox")
+	public String onlyOneCheckboxGetHandler(
+		@ModelAttribute CheckBoxForm cBForm
+	) {
+
+		// 初期画面表示でチェックボックスにチェックを入れる場合は、
+		// 次行をコメントインする事。
+		cBForm.setCheckbox1("1");
+
+		return "onlyOneCheckbox";
+
+	}
+
+	@PostMapping("/onlyOneCheckbox")
+	public String onlyOneCheckboxPostHandler(
+		@ModelAttribute CheckBoxForm cBForm
+	) {
+
+		System.out.println(cBForm);
+
+		return "onlyOneCheckbox";
+
+	}
+
+	// http://localhost:8080/onlyOneCheckbox
+	@GetMapping("/buttonAndHidden")
+	public String buttonAndHiddenGetHandler(
+		@ModelAttribute CheckBoxForm cBForm
+	) {
+
+		// 初期画面表示でチェックボックスにチェックを入れる場合は、
+		// 次行をコメントインする事。
+		cBForm.setCheckbox1("1");
+
+		return "onlyOneCheckbox";
+
+	}
+
+	@PostMapping("/buttonAndHidden")
+	public String buttonAndHiddenPostHandler(
+		@ModelAttribute CheckBoxForm cBForm
+	) {
+
+		System.out.println(cBForm);
+
+		return "onlyOneCheckbox";
+
+	}
+
+	// TODO checkbox を checkBox に変更する？
 
 }

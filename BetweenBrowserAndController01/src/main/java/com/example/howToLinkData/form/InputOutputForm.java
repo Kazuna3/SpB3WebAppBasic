@@ -25,5 +25,7 @@ public class InputOutputForm {
 	private String[] checkbox2;
 
 	private String checkbox3;
+	private String selectBox1;
+	private String textArea1;
 
 }

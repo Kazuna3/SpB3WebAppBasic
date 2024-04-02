@@ -81,12 +81,19 @@
 			選択肢３
 		</div>
 		<hr>
+		<div>セレクトボックス</div>
+		<select name="selectBox1" title="セレクトボックス">
+			<option th:field="*{selectBox1}" value="1">選択肢１</option>
+			<option th:field="*{selectBox1}" value="2">選択肢２</option>
+			<option th:field="*{selectBox1}" value="3">選択肢３</option>
+		</select>
+		<hr>
+		<div>テキストエリア</div>
+		<textarea th:field="*{textArea1}" rows="3" cols="50"></textarea>
+		<hr>
 		<!-- 
 		<input type="hidden">
 		<input type="button">
-		<select>
-			<option></option>
-		</select>
 		<button></button>
 		 -->
 		<input type="submit" value="送信">
