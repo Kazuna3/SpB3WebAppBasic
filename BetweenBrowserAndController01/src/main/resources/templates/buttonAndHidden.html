@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>色々なボタンの実装例(Example of button implementation.)</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<form method="post" action="/exampleOfButtonImplementation_1" th:object="${exOfBtnImplForm}">
+		<input type="hidden" th:field="*{hidden_1}">
+		<!-- 
+		①と②のボタン押下時の挙動は同じである。
+		ボタンのデザインのしやすさにおいて、②が優位である。
+		button tag には、formaction 属性があるので、フォームタグの action 属性に縛られない。
+		よってボタンは、button tag で実装することが望ましい。
+		-->
+		<input type="submit" value="送信">			<!-- ① -->
+		<button type="submit">ボタン１</button>	<!-- ② -->
+		<button type="submit" th:formaction="@{/exampleOfButtonImplementation_2}">ボタン２</button>
+		<!--
+		次行は使えなくていい。
+		<input type="button" value="ボタン１"> 
+		-->
+	</form>
+</body>
+</html>

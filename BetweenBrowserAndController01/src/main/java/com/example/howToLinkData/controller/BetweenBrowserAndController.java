@@ -1,4 +1,4 @@
-package com.example.howToLinkData;
+package com.example.howToLinkData.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.howToLinkData.form.CheckBoxForm;
+import com.example.howToLinkData.form.ExOfBtnImplForm;
 import com.example.howToLinkData.form.InputOutputForm;
 
 @Controller
@@ -119,28 +120,49 @@ public class BetweenBrowserAndController {
 
 	}
 
-	// http://localhost:8080/onlyOneCheckbox
-	@GetMapping("/buttonAndHidden")
-	public String buttonAndHiddenGetHandler(
-		@ModelAttribute CheckBoxForm cBForm
+	// http://localhost:8080/exampleOfButtonImplementation_1
+	@GetMapping("/exampleOfButtonImplementation_1")
+	public String buttonAndHiddenGetHandler1(
+		@ModelAttribute ExOfBtnImplForm exOfBtnImplForm
 	) {
 
-		// 初期画面表示でチェックボックスにチェックを入れる場合は、
-		// 次行をコメントインする事。
-		cBForm.setCheckbox1("1");
+		System.out.println("ハンドラメソッド：buttonAndHiddenGetHandler1 が実行されます。");
 
-		return "onlyOneCheckbox";
+		// 初期値を設定する。
+		exOfBtnImplForm.setHidden_1("ヒドゥン");
+		System.out.println(exOfBtnImplForm);
+
+		return "buttonAndHidden";
 
 	}
 
-	@PostMapping("/buttonAndHidden")
-	public String buttonAndHiddenPostHandler(
-		@ModelAttribute CheckBoxForm cBForm
+	@PostMapping("/exampleOfButtonImplementation_1")
+	public String buttonAndHiddenPostHandler1(
+		// public void buttonAndHiddenPostHandler1(
+		@ModelAttribute ExOfBtnImplForm exOfBtnImplForm
 	) {
 
-		System.out.println(cBForm);
+		System.out.println("ハンドラメソッド：buttonAndHiddenPostHandler1 が実行されます。");
+		System.out.println(exOfBtnImplForm);
 
-		return "onlyOneCheckbox";
+		exOfBtnImplForm.setHidden_1(exOfBtnImplForm.getHidden_1() + " " + exOfBtnImplForm.getHidden_1());
+		System.out.println(exOfBtnImplForm);
+
+		// return "redirect:/onlyOneCheckbox";
+
+		return "buttonAndHidden";
+
+	}
+
+	@PostMapping("/exampleOfButtonImplementation_2")
+	public String buttonAndHiddenPostHandler2(
+		@ModelAttribute ExOfBtnImplForm exOfBtnImplForm
+	) {
+
+		System.out.println("ハンドラメソッド：buttonAndHiddenPostHandler2 が実行されます。");
+		System.out.println(exOfBtnImplForm);
+
+		return "buttonAndHidden";
 
 	}
 
