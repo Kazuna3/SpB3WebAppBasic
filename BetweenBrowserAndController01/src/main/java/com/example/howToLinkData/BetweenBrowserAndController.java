@@ -2,6 +2,8 @@ package com.example.howToLinkData;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -89,6 +91,7 @@ public class BetweenBrowserAndController {
 		// 初期画面表示でチェックボックスにチェックを入れる場合は、
 		// 次行をコメントインする事。
 		cBForm.setCheckbox1("1");
+		// cBForm.setCheckbox1(1);
 
 		return "onlyOneCheckbox";
 
@@ -96,10 +99,21 @@ public class BetweenBrowserAndController {
 
 	@PostMapping("/onlyOneCheckbox")
 	public String onlyOneCheckboxPostHandler(
-		@ModelAttribute CheckBoxForm cBForm
+		@ModelAttribute @Validated CheckBoxForm cBForm,
+		BindingResult bindingResult
 	) {
 
 		System.out.println(cBForm);
+
+		if (bindingResult.hasFieldErrors()) {
+
+			System.out.println("単項目チェックでエラーを検出しました！");
+
+		} else {
+
+			System.out.println("単項目チェックをパスしました。");
+
+		}
 
 		return "onlyOneCheckbox";
 
