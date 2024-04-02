@@ -7,7 +7,7 @@ import lombok.Data;
 public class CheckBoxForm {
 
 	@Pattern(regexp = "[0-9]", message = "単項目チェックでエラーを検出しました。１桁の数字以外のデータはエラーになります。")
-	private String checkbox1;
+	private String checkBox1;
 
 	/*
 	フォームクラスのフィールドのデータ型は、String 型か、複数の checkBox を

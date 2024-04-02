@@ -33,9 +33,9 @@ public class BetweenBrowserAndController {
 
 		// チェックボックスの初期選択を設定する。
 		// String[] strArray = { "1" };
-		// inOutF.setCheckbox2(strArray);
+		// inOutF.setCheckBox2(strArray);
 		// 次行は、上２行と同じ処理である。
-		inOutF.setCheckbox2(new String[] { "1" });
+		inOutF.setCheckBox2(new String[] { "1" });
 
 		// セレクトボックスの初期選択を設定する。
 		inOutF.setSelectBox1("1");
@@ -67,7 +67,6 @@ public class BetweenBrowserAndController {
 
 	}
 
-	// http://localhost:8080/firstHandler
 	@PostMapping("/firstHandler")
 	public String firstHandler(
 		@ModelAttribute InputOutputForm inOutF
@@ -83,23 +82,23 @@ public class BetweenBrowserAndController {
 
 	}
 
-	// http://localhost:8080/onlyOneCheckbox
-	@GetMapping("/onlyOneCheckbox")
-	public String onlyOneCheckboxGetHandler(
+	// http://localhost:8080/onlyOneCheckBox
+	@GetMapping("/onlyOneCheckBox")
+	public String onlyOneCheckBoxGetHandler(
 		@ModelAttribute CheckBoxForm cBForm
 	) {
 
 		// 初期画面表示でチェックボックスにチェックを入れる場合は、
 		// 次行をコメントインする事。
-		cBForm.setCheckbox1("1");
-		// cBForm.setCheckbox1(1);
+		cBForm.setCheckBox1("1");
+		// cBForm.setCheckBox1(1);
 
-		return "onlyOneCheckbox";
+		return "onlyOneCheckBox";
 
 	}
 
-	@PostMapping("/onlyOneCheckbox")
-	public String onlyOneCheckboxPostHandler(
+	@PostMapping("/onlyOneCheckBox")
+	public String onlyOneCheckBoxPostHandler(
 		@ModelAttribute @Validated CheckBoxForm cBForm,
 		BindingResult bindingResult
 	) {
@@ -116,7 +115,7 @@ public class BetweenBrowserAndController {
 
 		}
 
-		return "onlyOneCheckbox";
+		return "onlyOneCheckBox";
 
 	}
 
@@ -148,7 +147,7 @@ public class BetweenBrowserAndController {
 		exOfBtnImplForm.setHidden_1(exOfBtnImplForm.getHidden_1() + " " + exOfBtnImplForm.getHidden_1());
 		System.out.println(exOfBtnImplForm);
 
-		// return "redirect:/onlyOneCheckbox";
+		// return "redirect:/onlyOneCheckBox";
 
 		return "buttonAndHidden";
 
@@ -165,7 +164,5 @@ public class BetweenBrowserAndController {
 		return "buttonAndHidden";
 
 	}
-
-	// TODO checkbox を checkBox に変更する？
 
 }

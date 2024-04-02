@@ -7,11 +7,11 @@
 <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<form method="post" action="/onlyOneCheckbox" th:object="${checkBoxForm}">
+	<form method="post" action="/onlyOneCheckBox" th:object="${checkBoxForm}">
 		<div>チェックボックス１</div>
-		<input type="checkbox" th:field="*{checkbox1}" value="1" title="選択肢">
+		<input type="checkbox" th:field="*{checkBox1}" value="1" title="選択肢">
 		選択肢１
-		<div th:if="${#fields.hasErrors('checkbox1')}" th:errors="*{checkbox1}" th:errorclass="red"></div>
+		<div th:if="${#fields.hasErrors('checkBox1')}" th:errors="*{checkBox1}" th:errorclass="red"></div>
 		<hr>
 		<input type="submit" value="送信">
 		<!-- エラーを表示する -->

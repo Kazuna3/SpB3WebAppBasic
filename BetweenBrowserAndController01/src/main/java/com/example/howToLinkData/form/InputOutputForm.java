@@ -9,7 +9,7 @@ public class InputOutputForm {
 	private String passWord;
 	private String radioBtn1;
 	private String radioBtn2;
-	private String checkbox1;
+	private String checkBox1;
 
 	// ２つ以上のチェックボックスを、グループ化して使用する場合は、
 	// ［checkbox2］のように、そのデータ型は、String の配列が最善と考える。
@@ -22,9 +22,9 @@ public class InputOutputForm {
 	// それを、画面側に戻すことになるが、Thymelef の選択肢の value に［1,2,3］が無いため、
 	// 選択していた状態が、保てなくなるからである。
 	// String の配列を使用した場合は、正しく連携できる。
-	private String[] checkbox2;
+	private String[] checkBox2;
 
-	private String checkbox3;
+	private String checkBox3;
 	private String selectBox1;
 	private String textArea1;
 
