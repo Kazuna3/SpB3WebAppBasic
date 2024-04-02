@@ -46,22 +46,22 @@
 		</div>
 		<hr>
 		<div>チェックボックス１</div>
-		<input type="checkbox" th:field="*{checkbox1}" value="1">
+		<input type="checkbox" th:field="*{checkBox1}" value="1">
 		選択肢１
 		<hr>
 		<div>チェックボックス２</div>
 		<div>複数のチェックボックスをOnにして送信ボタンを押下しても選択したチェックボックスにチェックが入る。</div>
 		<div>上の理由は、文字列型の配列を使用している為。</div>
 		<div>
-			<input type="checkbox" th:field="*{checkbox2}" value="1">
+			<input type="checkbox" th:field="*{checkBox2}" value="1">
 			選択肢１（初期選択項目）
 		</div>
 		<div>
-			<input type="checkbox" th:field="*{checkbox2}" value="2">
+			<input type="checkbox" th:field="*{checkBox2}" value="2">
 			選択肢２
 		</div>
 		<div>
-			<input type="checkbox" th:field="*{checkbox2}" value="3">
+			<input type="checkbox" th:field="*{checkBox2}" value="3">
 			選択肢３
 		</div>
 		<hr>
@@ -69,15 +69,15 @@
 		<div>複数のチェックボックスをOnにして送信ボタンを押下すると、選択したチェックボックスのチェックが消える。</div>
 		<div>上の理由は、文字列型を使用している為。</div>
 		<div>
-			<input type="checkbox" th:field="*{checkbox3}" value="1">
+			<input type="checkbox" th:field="*{checkBox3}" value="1">
 			選択肢１
 		</div>
 		<div>
-			<input type="checkbox" th:field="*{checkbox3}" value="2">
+			<input type="checkbox" th:field="*{checkBox3}" value="2">
 			選択肢２
 		</div>
 		<div>
-			<input type="checkbox" th:field="*{checkbox3}" value="3">
+			<input type="checkbox" th:field="*{checkBox3}" value="3">
 			選択肢３
 		</div>
 		<hr>
@@ -91,7 +91,7 @@
 		<div>テキストエリア</div>
 		<textarea th:field="*{textArea1}" rows="3" cols="50"></textarea>
 		<hr>
-		<input type="submit" value="送信">
+		<button type="submit">送信</button>
 	</form>
 </body>
 </html>
