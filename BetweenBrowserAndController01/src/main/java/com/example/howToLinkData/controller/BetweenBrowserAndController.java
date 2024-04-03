@@ -1,7 +1,7 @@
 package com.example.howToLinkData.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+// import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,11 +22,11 @@ public class BetweenBrowserAndController {
 	) {
 
 		// 初期値を設定する。
-		inOutF.setTextBox("初期値");
+		inOutF.setTextBox("テキストボックスの初期値");
 
 		// 初期値を設定する。
 		// パスワードには、何も値を設定できないみたい・・・
-		inOutF.setPassWord("初期値");
+		inOutF.setPassWord("パスワードの初期値");
 
 		// ラジオボタンの初期選択を設定する。
 		inOutF.setRadioBtn1("1");
@@ -41,7 +41,7 @@ public class BetweenBrowserAndController {
 		inOutF.setSelectBox1("1");
 
 		// テキストエリアの初期値を設定する。
-		// inOutF.setTextArea1("テキストエリアの初期値");
+		inOutF.setTextArea1("テキストエリアの初期値");
 
 		return "elementPartsOfAForm";
 
@@ -49,23 +49,25 @@ public class BetweenBrowserAndController {
 
 	// 
 	/**
-	 * defaultHandler1 メソッドの書き換え版。
+	 * defaultHandler1 メソッドで @ModelAttribute を使わない場合の書き換え版。
 	 * 本メソッドの起動用 URL => http://localhost:8080
 	 * @param model
 	 * @return String ビューネームの文字列
 	 */
-	// @GetMapping("/")
-	public String defaultHandler2(
+	/*
+	@GetMapping("/")
+	public String defaultHandler1(
 		Model model
 	) {
-
+	
 		InputOutputForm inOutF = new InputOutputForm();
 		inOutF.setTextBox("初期値");
 		model.addAttribute("inputOutputForm", inOutF);
-
+	
 		return "elementPartsOfAForm";
-
+	
 	}
+	*/
 
 	@PostMapping("/firstHandler")
 	public String firstHandler(
@@ -137,7 +139,6 @@ public class BetweenBrowserAndController {
 
 	@PostMapping("/exampleOfButtonImplementation_1")
 	public String buttonAndHiddenPostHandler1(
-		// public void buttonAndHiddenPostHandler1(
 		@ModelAttribute ExOfBtnImplForm exOfBtnImplForm
 	) {
 
@@ -146,8 +147,6 @@ public class BetweenBrowserAndController {
 
 		exOfBtnImplForm.setHidden_1(exOfBtnImplForm.getHidden_1() + " " + exOfBtnImplForm.getHidden_1());
 		System.out.println(exOfBtnImplForm);
-
-		// return "redirect:/onlyOneCheckBox";
 
 		return "buttonAndHidden";
 
