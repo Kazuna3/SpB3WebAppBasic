@@ -11,6 +11,10 @@
 		<input type="number" th:field=*{answerNumber}>
 		<div th:if="${#fields.hasErrors('answerNumber')}" th:errors="*{answerNumber}" th:errorclass="red"></div>
 		<button type="submit">回答送信</button>
+		<!-- 答え合わせの結果を表示する -->
+		<th:block th:if="*{result}!=null">
+			<div>[[*{result}]]</div>
+		</th:block>
 		<!-- エラーを表示する -->
 		<ul th:if="${#fields.hasErrors('*')}">
 			<li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
