@@ -15,4 +15,7 @@ public class AnswerForm {
 	// @formatter:on 
 	private String answerNumber;
 
+	// 数当てゲームの答え合わせの評価結果文字列を保持する。
+	private String result;
+
 }
