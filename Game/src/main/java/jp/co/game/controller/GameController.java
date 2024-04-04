@@ -8,18 +8,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jp.co.game.form.AnswerForm;
+import jp.co.game.service.GenerateAnswer;
+import jp.co.game.service.Judge;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Controller
 public class GameController {
 
 	// 数当てゲームの答えの値。
-	private final Integer answerNumber = 123;
+	private Integer answerNumber = 0;
+	private final Judge judge;
+	private final GenerateAnswer generateAnswer;
 
 	@GetMapping("/")
 	public String initial(
 		@ModelAttribute @Validated AnswerForm answerForm
 	) {
 
+		answerNumber = generateAnswer.generate();
+		System.out.println("■正解：" + answerNumber);
 		return "gameScreen";
 
 	}
@@ -40,22 +48,7 @@ public class GameController {
 
 		Integer ansOfPlayer = Integer.valueOf(answerForm.getAnswerNumber());
 
-		if (answerNumber == ansOfPlayer) {
-
-			// 正解した。
-			System.out.println("正解した。");
-
-		} else if (answerNumber < ansOfPlayer) {
-
-			// プレイヤーの値が大きい。
-			System.out.println("プレイヤーの値が大きい。");
-
-		} else {
-
-			// プレイヤーの値が小さい。
-			System.out.println("プレイヤーの値が小さい。");
-
-		}
+		answerForm.setResult(judge.kotaeAwase(answerNumber, ansOfPlayer));
 
 		return "gameScreen";
 
