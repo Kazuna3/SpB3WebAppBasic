@@ -12,6 +12,9 @@ import jp.co.game.form.AnswerForm;
 @Controller
 public class GameController {
 
+	// 数当てゲームの答えの値。
+	private final Integer answerNumber = 123;
+
 	@GetMapping("/")
 	public String initial(
 		@ModelAttribute @Validated AnswerForm answerForm
@@ -31,6 +34,26 @@ public class GameController {
 
 			// 単項目チェックでエラーを検出した場合の処理。
 			System.out.println("単項目チェックでエラーを検出した。");
+			return "gameScreen";
+
+		}
+
+		Integer ansOfPlayer = Integer.valueOf(answerForm.getAnswerNumber());
+
+		if (answerNumber == ansOfPlayer) {
+
+			// 正解した。
+			System.out.println("正解した。");
+
+		} else if (answerNumber < ansOfPlayer) {
+
+			// プレイヤーの値が大きい。
+			System.out.println("プレイヤーの値が大きい。");
+
+		} else {
+
+			// プレイヤーの値が小さい。
+			System.out.println("プレイヤーの値が小さい。");
 
 		}
 
