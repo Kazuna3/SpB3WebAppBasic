@@ -1,6 +1,10 @@
 package jp.co.game.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpSession;
+import jp.co.game.bean.Result;
 import jp.co.game.form.AnswerForm;
 import jp.co.game.service.GenerateAnswer;
 import jp.co.game.service.Judge;
@@ -37,7 +42,8 @@ public class GameController {
 	@PostMapping("/sendMyAnswer")
 	public String judge(
 		@ModelAttribute @Validated AnswerForm answerForm,
-		BindingResult bindingResult
+		BindingResult bindingResult,
+		Model model
 	) {
 
 		if (bindingResult.hasErrors()) {
@@ -53,6 +59,16 @@ public class GameController {
 		Integer answerNumber = (Integer) session.getAttribute("answerNumber");
 
 		answerForm.setResult(judge.kotaeAwase(answerNumber, ansOfPlayer));
+
+		answerForm.setAnswerNumber("");
+
+		List<Result> listResult = new ArrayList<>();
+
+		listResult.add(new Result("1", "10", "hoge"));
+		listResult.add(new Result("2", "20", "fuga"));
+		listResult.add(new Result("3", "30", "pooo"));
+
+		model.addAttribute("listResult", listResult);
 
 		return "gameScreen";
 
