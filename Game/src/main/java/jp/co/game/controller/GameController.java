@@ -54,12 +54,16 @@ public class GameController {
 
 		}
 
+		// 正解の値をセッションから取得する。
+		Integer answerNumber = (Integer) session.getAttribute("answerNumber");
+		// プレーヤが出した回答を取得する。
 		Integer ansOfPlayer = Integer.valueOf(answerForm.getAnswerNumber());
 
-		Integer answerNumber = (Integer) session.getAttribute("answerNumber");
+		String kotaeAwasenoKekka = judge.kotaeAwase(answerNumber, ansOfPlayer);
+		// 答え合わせの結果を Form クラスに登録する。
+		answerForm.setResult(kotaeAwasenoKekka);
 
-		answerForm.setResult(judge.kotaeAwase(answerNumber, ansOfPlayer));
-
+		// 回答欄をブランクにする。
 		answerForm.setAnswerNumber("");
 
 		List<Result> listResult = new ArrayList<>();
