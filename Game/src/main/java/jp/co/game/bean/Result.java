@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Result {
 
 	// 結果の番号を保持する。
-	private String seqNum;
+	private Integer seqNum;
 
 	// ゲームのプレーヤの答えた数値を保持する。
 	private String answerNumber;
