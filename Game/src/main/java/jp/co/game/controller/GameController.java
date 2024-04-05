@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class GameController {
 
-	// 数当てゲームの答えの値。
 	private final Judge judge;
 	private final GenerateAnswer generateAnswer;
 	private final HttpSession session;
@@ -56,36 +55,37 @@ public class GameController {
 
 		// 正解の値をセッションから取得する。
 		Integer answerNumber = (Integer) session.getAttribute("answerNumber");
+
 		// プレーヤが出した回答を取得する。
 		Integer ansOfPlayer = Integer.valueOf(answerForm.getAnswerNumber());
 
+		// 答え合わせを行う。
 		String kotaeAwasenoKekka = judge.kotaeAwase(answerNumber, ansOfPlayer);
+
 		// 答え合わせの結果を Form クラスに登録する。
 		answerForm.setResult(kotaeAwasenoKekka);
 
 		// 回答欄をブランクにする。
 		answerForm.setAnswerNumber("");
 
-		//		List<Result> listResult = new ArrayList<>();
-		//
-		//		listResult.add(new Result("1", "10", "hoge"));
-		//		listResult.add(new Result("2", "20", "fuga"));
-		//		listResult.add(new Result("3", "30", "pooo"));
-
-		//>>>
+		// 回答履歴のデータをセッションから取得する。
 		@SuppressWarnings("unchecked")
 		List<Result> listResult = (List<Result>) session.getAttribute("listResult");
 
 		if (null == listResult) {
 
+			// 回答履歴のデータが未登録だった場合は、初期化処理を行う。
 			listResult = new ArrayList<>();
 
 		}
 
+		// 回答履歴のデータを生成する。
 		listResult.add(new Result(listResult.size() + 1, String.valueOf(ansOfPlayer), kotaeAwasenoKekka));
-		session.setAttribute("listResult", listResult);
-		//<<<
 
+		// 回答履歴のデータをセッションに保存する。
+		session.setAttribute("listResult", listResult);
+
+		// モデルに回答履歴のデータを追加する。
 		model.addAttribute("listResult", listResult);
 
 		return "gameScreen";
