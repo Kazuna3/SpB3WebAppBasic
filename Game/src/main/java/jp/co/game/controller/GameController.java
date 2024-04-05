@@ -66,11 +66,25 @@ public class GameController {
 		// 回答欄をブランクにする。
 		answerForm.setAnswerNumber("");
 
-		List<Result> listResult = new ArrayList<>();
+		//		List<Result> listResult = new ArrayList<>();
+		//
+		//		listResult.add(new Result("1", "10", "hoge"));
+		//		listResult.add(new Result("2", "20", "fuga"));
+		//		listResult.add(new Result("3", "30", "pooo"));
 
-		listResult.add(new Result("1", "10", "hoge"));
-		listResult.add(new Result("2", "20", "fuga"));
-		listResult.add(new Result("3", "30", "pooo"));
+		//>>>
+		@SuppressWarnings("unchecked")
+		List<Result> listResult = (List<Result>) session.getAttribute("listResult");
+
+		if (null == listResult) {
+
+			listResult = new ArrayList<>();
+
+		}
+
+		listResult.add(new Result(listResult.size() + 1, String.valueOf(ansOfPlayer), kotaeAwasenoKekka));
+		session.setAttribute("listResult", listResult);
+		//<<<
 
 		model.addAttribute("listResult", listResult);
 
