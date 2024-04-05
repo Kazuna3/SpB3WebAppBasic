@@ -45,10 +45,29 @@ public class GameController {
 		Model model
 	) {
 
+		// 回答履歴のデータをセッションから取得する。
+		@SuppressWarnings("unchecked")
+		List<Result> listResult = (List<Result>) session.getAttribute("listResult");
+
+		if (null == listResult) {
+
+			// 回答履歴のデータが未登録だった場合は、初期化処理を行う。
+			listResult = new ArrayList<>();
+
+		}
+
 		if (bindingResult.hasErrors()) {
 
 			// 単項目チェックでエラーを検出した場合の処理。
 			System.out.println("単項目チェックでエラーを検出した。");
+
+			if (0 < listResult.size()) {
+
+				// モデルに回答履歴のデータを追加する。
+				model.addAttribute("listResult", listResult);
+
+			}
+
 			return "gameScreen";
 
 		}
@@ -67,17 +86,6 @@ public class GameController {
 
 		// 回答欄をブランクにする。
 		answerForm.setAnswerNumber("");
-
-		// 回答履歴のデータをセッションから取得する。
-		@SuppressWarnings("unchecked")
-		List<Result> listResult = (List<Result>) session.getAttribute("listResult");
-
-		if (null == listResult) {
-
-			// 回答履歴のデータが未登録だった場合は、初期化処理を行う。
-			listResult = new ArrayList<>();
-
-		}
 
 		// 回答履歴のデータを生成する。
 		listResult.add(new Result(listResult.size() + 1, String.valueOf(ansOfPlayer), kotaeAwasenoKekka));
