@@ -33,6 +33,11 @@ public class GameController {
 
 		Integer answerNumber = generateAnswer.generate();
 		System.out.println("■正解：" + answerNumber);
+
+		// セッション内の情報をクリアする。
+		session.invalidate();
+
+		// セッションに数当てゲームの答えを登録する。
 		session.setAttribute("answerNumber", answerNumber);
 		return "gameScreen";
 
