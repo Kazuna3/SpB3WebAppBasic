@@ -7,6 +7,7 @@ import lombok.Data;
 public class AnswerForm {
 
 	// @formatter:off
+	// ゲームのプレーヤの答えた数値を文字列データで保持する。
 	@Pattern(
 		regexp = "\\d{1,3}?",
 		message = "単項目チェックでエラーを検出しました。"
