@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpSession;
 import jp.co.game.form.AnswerForm;
 import jp.co.game.service.GenerateAnswer;
 import jp.co.game.service.Judge;
@@ -17,17 +18,18 @@ import lombok.RequiredArgsConstructor;
 public class GameController {
 
 	// 数当てゲームの答えの値。
-	private Integer answerNumber = 0;
 	private final Judge judge;
 	private final GenerateAnswer generateAnswer;
+	private final HttpSession session;
 
 	@GetMapping("/")
 	public String initial(
 		@ModelAttribute @Validated AnswerForm answerForm
 	) {
 
-		answerNumber = generateAnswer.generate();
+		Integer answerNumber = generateAnswer.generate();
 		System.out.println("■正解：" + answerNumber);
+		session.setAttribute("answerNumber", answerNumber);
 		return "gameScreen";
 
 	}
@@ -47,6 +49,8 @@ public class GameController {
 		}
 
 		Integer ansOfPlayer = Integer.valueOf(answerForm.getAnswerNumber());
+
+		Integer answerNumber = (Integer) session.getAttribute("answerNumber");
 
 		answerForm.setResult(judge.kotaeAwase(answerNumber, ansOfPlayer));
 
