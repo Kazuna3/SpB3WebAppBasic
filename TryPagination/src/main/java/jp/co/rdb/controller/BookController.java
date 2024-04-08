@@ -19,15 +19,15 @@ public class BookController {
 
 	private final BookRepository bookRepository;
 
+	//	@GetMapping("/")
+	//	public String book() {
+	//
+	//		return "redirect:/h2-console";
+	//
+	//	}
+
 	@GetMapping("/")
-	public String book() {
-
-		return "redirect:/h2-console";
-
-	}
-
-	@GetMapping("/pagnationList")
-	public String pagnationList(
+	public String indexGetHandler(
 		Model model,
 		@PageableDefault(page = 0, size = 5, sort = "id") Pageable pageable
 	) {
@@ -40,8 +40,20 @@ public class BookController {
 				bl -> System.out.println(
 						"Id ［" + bl.getId() + "］" + "Title［" + bl.getTitle() + "］"));
 
+		// pageBook は、Pagination のリンクを生成する為に必要なので、Model に追加する。
+		model.addAttribute("pageBook", pageBook);
 		model.addAttribute("listBook", listBook);
 		return "pagnationList";
+
+	}
+
+	@GetMapping("/pagnationList")
+	public String pagnationListGetHandler(
+		Model model,
+		@PageableDefault(page = 0, size = 5, sort = "id") Pageable pageable
+	) {
+
+		return indexGetHandler(model, pageable);
 
 	}
 
