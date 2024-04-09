@@ -74,4 +74,49 @@
 		<a th:unless="${pageBook.isLast()}" th:href="@{/pagnationList(page = ${pageBook.getNumber()+ 1})}">次→</a>
 	</li>
 </ul>
+<hr>
+<div th:text="|pageBook.getNumber() の値［${pageBook.getNumber()}］|"></div>
+<div th:text="|pageBook.getTotalPages() の値［${pageBook.getTotalPages()}］|"></div>
+<div th:text="|pageBook.getTotalPages()-1 の値［${pageBook.getTotalPages()-1}］|"></div>
 </html>
+<!--
+■Original
+th:each="i : ${#numbers.sequence(pageBook.getNumber()-2 < 0 ? 0 : pageBook.getNumber()-2, pageBook.getNumber()+2 > pageBook.getTotalPages()-1 ? pageBook.getTotalPages()-1 : pageBook.getNumber()+2)}"
+
+■分解１
+th:each="i : ${
+#numbers.sequence(
+    pageBook.getNumber()-2 < 0 ? 0 : pageBook.getNumber()-2, pageBook.getNumber()+2 > pageBook.getTotalPages()-1 ? pageBook.getTotalPages()-1 : pageBook.getNumber()+2
+  )
+}"
+
+・#numbers は、import org.thymeleaf.expression.Numbers;	でインポート可能なクラスである。
+・numbers.sequence を調べると、次行の仕様が分かった。
+・#numbers.sequence は、第１引数から第２引数までの、Integer の配列を返すメソッドである。
+
+【三項演算子の書き換え】
+a?b:c
+
+if(a){
+  b
+}else{
+  c
+}
+
+【ロジック１】
+if(pageBook.getNumber()-2 < 0){
+  0
+}else{
+  pageBook.getNumber()-2
+}
+
+【ロジック２】
+if(pageBook.getNumber()+2 > pageBook.getTotalPages()-1){
+  pageBook.getTotalPages()-1
+}else{
+  pageBook.getNumber()+2
+}
+
+■Originalの処理を書き換えると次行となる
+numbers.sequence(【ロジック１】, 【ロジック２】)
+-->

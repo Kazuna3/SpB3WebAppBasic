@@ -1,9 +1,13 @@
 package jp.co.rdb;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.thymeleaf.expression.Numbers;
 
 import jp.co.rdb.entity.Book;
 import jp.co.rdb.service.BookService;
@@ -19,6 +23,7 @@ public class TryPaginationApplication {
 
 		SpringApplication.run(TryPaginationApplication.class, args);
 
+		// import org.springframework.context.ApplicationContext;
 		// ApplicationContext context = SpringApplication.run(TryPaginationApplication.class, args);
 		// TryPaginationApplication app = context.getBean(TryPaginationApplication.class);
 		// app.execute();
@@ -36,6 +41,8 @@ public class TryPaginationApplication {
 		System.out.println("(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/");
 		findAllBook();
 		countBook();
+
+		dousaKakunin();
 
 	}
 
@@ -94,6 +101,20 @@ public class TryPaginationApplication {
 			);
 			// @formatter:on
 		}
+
+	}
+
+	// @SuppressWarnings("unused")
+	private void dousaKakunin() {
+
+		System.out.println("■Numbersのsequenceメソッドの動作を確認する。");
+
+		Numbers number = new Numbers(Locale.JAPANESE);
+		Integer[] aryInteger = number.sequence(0, -10);
+
+		List<Integer> list = Arrays.asList(aryInteger);
+
+		list.forEach(i -> System.out.println(i));
 
 	}
 
