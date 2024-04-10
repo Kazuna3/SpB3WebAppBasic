@@ -36,6 +36,7 @@ public class BookController {
 		List<Book> listBook = pageBook.getContent();
 
 		// コンソールで確認する。
+		System.out.println("■取得レコードを出力する。");
 		listBook.forEach(
 				bl -> System.out.println(
 						"Id ［" + bl.getId() + "］" + "Title［" + bl.getTitle() + "］"));
