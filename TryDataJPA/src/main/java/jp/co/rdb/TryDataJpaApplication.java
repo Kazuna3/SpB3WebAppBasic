@@ -1,6 +1,5 @@
 package jp.co.rdb;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.boot.SpringApplication;
@@ -53,7 +52,12 @@ public class TryDataJpaApplication {
 	// @SuppressWarnings("unused")
 	private void findAllBook() {
 
-		List<Book> books = bookService.findAllBook();
+		// リポジトリで JpaRepository を拡張したら使用可となるメソッドである。
+		// List<Book> books = bookService.findAllBook();
+
+		// リポジトリで CrudRepository を祖先に持つ JpaRepository を拡張したら使用可となるメソッドである。
+		// リポジトリで CrudRepository を拡張したら使用可となるメソッドである。
+		Iterable<Book> books = bookService.findAllBook();
 
 		// @formatter:off
 		books.forEach(

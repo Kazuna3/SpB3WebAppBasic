@@ -24,6 +24,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	// Book テーブルの全レコードを抽出する。
+	// リポジトリで JpaRepository を拡張したら使用可となるメソッドである。
 	@Override
 	public List<Book> findAllBook() {
 
@@ -31,6 +32,17 @@ public class BookServiceImpl implements BookService {
 		return listBook;
 
 	}
+
+	// Book テーブルの全レコードを抽出する。
+	// リポジトリで CrudRepository を祖先に持つ JpaRepository を拡張したら使用可となるメソッドである。
+	// リポジトリで CrudRepository を拡張したら使用可となるメソッドである。
+	//	@Override
+	//	public Iterable<Book> findAllBook() {
+	//
+	//		Iterable<Book> iterableBook = bookRepository.findAll();
+	//		return iterableBook;
+	//
+	//	}
 
 	// Book テーブルのレコード件数を返す。
 	@Override

@@ -1,6 +1,5 @@
 package jp.co.rdb.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import jp.co.rdb.entity.Book;
@@ -11,7 +10,13 @@ public interface BookService {
 	public void saveBook(Book book);
 
 	// クイズの全レコードを抽出する
-	public List<Book> findAllBook();
+	// リポジトリで JpaRepository を拡張したら使用可となるメソッドである。
+	// public List<Book> findAllBook();
+
+	// クイズの全レコードを抽出する
+	// リポジトリで CrudRepository を祖先に持つ JpaRepository を拡張したら使用可となるメソッドである。
+	// リポジトリで CrudRepository を拡張したら使用可となるメソッドである。
+	public Iterable<Book> findAllBook();
 
 	// クイズのレコード件数を返す
 	public long countBook();
