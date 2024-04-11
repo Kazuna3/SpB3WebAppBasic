@@ -38,6 +38,8 @@ public class TryDataJdbcApplication {
 		System.out.println("(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/");
 		findAllBook();
 		countBook();
+		System.out.println("(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/(^0^)/");
+		findRandomBook();
 
 	}
 
@@ -95,6 +97,28 @@ public class TryDataJdbcApplication {
 				"ID［" + book.get().getId() + "］, " + "Title［" + book.get().getTitle() + "］"
 			);
 			// @formatter:on
+		}
+
+	}
+
+	// @SuppressWarnings("unused")
+	private void findRandomBook() {
+
+		Optional<Book> book = bookService.findRandomBook();
+
+		if (book.isPresent()) {
+
+			System.out.println("ランダムなレコードの抽出を試行した。");
+			// @formatter:off
+			System.out.println(
+				"ID［" + book.get().getId() + "］, " + "Title［" + book.get().getTitle() + "］"
+			);
+			// @formatter:on
+
+		} else {
+
+			System.out.println("ランダムなレコードの抽出を試みたが、抽出できなかった。");
+
 		}
 
 	}

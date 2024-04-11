@@ -56,4 +56,13 @@ public class BookServiceImpl implements BookService {
 
 	}
 
+	// ランダムにレコードを１件抽出して返す。
+	@Override
+	public Optional<Book> findRandomBook() {
+
+		Optional<Book> book = bookRepository.findRandomBook();
+		return book;
+
+	}
+
 }

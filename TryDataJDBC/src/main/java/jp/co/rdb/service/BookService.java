@@ -21,4 +21,7 @@ public interface BookService {
 	// id を検索条件として、クイズのレコードを検索し、その該当レコードを返す。
 	public Optional<Book> findByIdBook(Integer id);
 
+	// ランダムにレコードを１件抽出して返す。
+	public Optional<Book> findRandomBook();
+
 }
