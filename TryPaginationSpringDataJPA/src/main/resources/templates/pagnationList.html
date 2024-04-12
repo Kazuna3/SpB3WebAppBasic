@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<title>Thymeleaf Sample</title>
+</head>
+<body>
+	<h3>ページネーションを利用した一覧表</h3>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+		</tr>
+		<tr th:each="book:${listBook}">
+			<td th:text="${book.id}">ダミー</td>
+			<td th:text="${book.title}">ダミー</td>
+		</tr>
+	</table>
+</body>
+<!-- 次の id="nav" のブロックは、［演習課題③ ページリンクの範囲を制限する］の対応前の実装コードである。-->
+<ul id="nav">
+	<li>
+		<span th:if="${pageBook.isFirst()}">←前</span>
+		<a th:unless="${pageBook.isFirst()}" th:href="@{/pagnationList(page = ${pageBook.getNumber() - 1})}">←前</a>
+	</li>
+	<li th:each="i : ${#numbers.sequence(0, pageBook.getTotalPages() - 1)}">
+		<span th:if="${i == pageBook.getNumber()}" th:text="${i + 1}"></span>
+		<a th:unless="${i == pageBook.getNumber()}" th:href="@{/pagnationList(page = ${i})}" th:text="${i + 1}"></a>
+	</li>
+	<li>
+		<span th:if="${pageBook.isLast()}">次→</span>
+		<a th:unless="${pageBook.isLast()}" th:href="@{/pagnationList(page = ${pageBook.getNumber()+ 1})}">次→</a>
+	</li>
+</ul>
+<!-- 次の id="nav" のブロックは、［演習課題③ ページリンクの範囲を制限する］の私の考案した実装コードである。-->
+<ul id="nav">
+	<li>
+		<span th:if="${pageBook.isFirst()}">←前</span>
+		<a th:unless="${pageBook.isFirst()}" th:href="@{/pagnationList(page = ${pageBook.getNumber() - 1})}">←前</a>
+	</li>
+	<li th:each="i : ${#numbers.sequence(pageBook.getNumber() - 2, pageBook.getNumber() - 1)}">
+		<a th:if="${0 <= i}" th:href="@{/pagnationList(page = ${i})}" th:text="${i + 1}"></a>
+	</li>
+	<li>
+		<span th:text="'現在ページ：' + ${pageBook.getNumber() + 1}"></span>
+	</li>
+	<li th:if="${(pageBook.getNumber() + 1) < pageBook.getTotalPages()}">
+		<a th:href="@{/pagnationList(page = ${pageBook.getNumber() + 1})}" th:text="${pageBook.getNumber() + 2}"></a>
+	</li>
+	<li th:if="${(pageBook.getNumber() + 2) < pageBook.getTotalPages()}">
+		<a th:href="@{/pagnationList(page = ${pageBook.getNumber() + 2})}" th:text="${pageBook.getNumber() + 3}"></a>
+	</li>
+	<li>
+		<span th:if="${pageBook.isLast()}">次→</span>
+		<a th:unless="${pageBook.isLast()}" th:href="@{/pagnationList(page = ${pageBook.getNumber()+ 1})}">次→</a>
+	</li>
+</ul>
+<!-- 次の id="nav" のブロックは、［演習課題③ ページリンクの範囲を制限する］の書籍の回答例の実装コードである。-->
+<ul id="nav">
+	<li>
+		<span th:if="${pageBook.isFirst()}">←前</span>
+		<a th:unless="${pageBook.isFirst()}" th:href="@{/pagnationList(page = ${pageBook.getNumber() - 1})}">←前</a>
+	</li>
+	<li
+		th:each="i : ${#numbers.sequence(pageBook.getNumber()-2 < 0 ? 0 : pageBook.getNumber()-2, pageBook.getNumber()+2 > pageBook.getTotalPages()-1 ? pageBook.getTotalPages()-1 : pageBook.getNumber()+2)}"
+	>
+		<span th:if="${i == pageBook.getNumber()}" th:text="${i + 1}"></span>
+		<a th:unless="${i == pageBook.getNumber()}" th:href="@{/pagnationList(page = ${i})}" th:text="${i + 1}"></a>
+	</li>
+	<li>
+		<span th:if="${pageBook.isLast()}">次→</span>
+		<a th:unless="${pageBook.isLast()}" th:href="@{/pagnationList(page = ${pageBook.getNumber()+ 1})}">次→</a>
+	</li>
+</ul>
+<hr>
+<div th:text="|pageBook.getNumber() の値［${pageBook.getNumber()}］|"></div>
+<div th:text="|pageBook.getTotalPages() の値［${pageBook.getTotalPages()}］|"></div>
+<div th:text="|pageBook.getTotalPages()-1 の値［${pageBook.getTotalPages()-1}］|"></div>
+</html>
+<!--
+■Original
+th:each="i : ${#numbers.sequence(pageBook.getNumber()-2 < 0 ? 0 : pageBook.getNumber()-2, pageBook.getNumber()+2 > pageBook.getTotalPages()-1 ? pageBook.getTotalPages()-1 : pageBook.getNumber()+2)}"
+
+■分解１
+th:each="i : ${
+#numbers.sequence(
+    pageBook.getNumber()-2 < 0 ? 0 : pageBook.getNumber()-2, pageBook.getNumber()+2 > pageBook.getTotalPages()-1 ? pageBook.getTotalPages()-1 : pageBook.getNumber()+2
+  )
+}"
+
+・#numbers は、import org.thymeleaf.expression.Numbers;	でインポート可能なクラスである。
+・numbers.sequence を調べると、次行の仕様が分かった。
+・#numbers.sequence は、第１引数から第２引数までの、Integer の配列を返すメソッドである。
+
+【三項演算子の書き換え】
+a?b:c
+
+if(a){
+  b
+}else{
+  c
+}
+
+【ロジック１】
+if(pageBook.getNumber()-2 < 0){
+  0
+}else{
+  pageBook.getNumber()-2
+}
+
+【ロジック２】
+if(pageBook.getNumber()+2 > pageBook.getTotalPages()-1){
+  pageBook.getTotalPages()-1
+}else{
+  pageBook.getNumber()+2
+}
+
+■Originalの処理を書き換えると次行となる
+numbers.sequence(【ロジック１】, 【ロジック２】)
+-->
