@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS persons;
+
+CREATE TABLE IF NOT EXISTS person
+(
+		id serial PRIMARY KEY
+	,	name VARCHAR (100)
+);
