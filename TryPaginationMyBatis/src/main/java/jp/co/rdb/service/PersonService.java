@@ -33,12 +33,12 @@ public class PersonService {
 
 	}
 
-	// @formatter:off
 	public Page<Person> findByShimei(
+	// @formatter:off
 			Pageable pageable
 		,	String shimei
+	// @formatter:on
 	) {
-	// @formatter:off
 
 		RowBounds rowBounds = new RowBounds(
 				(int) pageable.getOffset(),
@@ -51,12 +51,12 @@ public class PersonService {
 
 	}
 
-	// @formatter:off
 	public Page<Person> findByShimeiLike(
+	// @formatter:off
 			Pageable pageable
 		,	String shimei
+	// @formatter:on
 	) {
-	// @formatter:off
 
 		RowBounds rowBounds = new RowBounds(
 				(int) pageable.getOffset(),
@@ -66,6 +66,12 @@ public class PersonService {
 		Long total = personRepository.findByShimeiLikeCount(shimei);
 
 		return new PageImpl<>(persons, pageable, total);
+
+	}
+
+	public Integer deleteById(Integer id) {
+
+		return personRepository.deleteById(id);
 
 	}
 

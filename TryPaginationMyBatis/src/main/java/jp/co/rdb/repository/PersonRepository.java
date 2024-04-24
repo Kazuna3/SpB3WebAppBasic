@@ -23,4 +23,6 @@ public interface PersonRepository {
 
 	public Long findByShimeiLikeCount(String shimei);
 
+	public int deleteById(Integer id);
+
 }

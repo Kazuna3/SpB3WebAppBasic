@@ -7,7 +7,7 @@
 <title>listPerson.html</title>
 </head>
 <body>
-	<h4>MyBatis APP</h4>
+	<h1>MyBatis を用いた Pagination の実現可能性調査</h1>
 	<div>
 		<form th:action="@{/}" method="post" th:object="${searchConditionForm}">
 			<!-- <input type="text" th:field="*{shimei}" size="40" placeholder="名前を入力してください"> -->
@@ -23,12 +23,19 @@
 				<tr>
 					<th>id</th>
 					<th>名前</th>
+					<th>削除</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="p : ${persons}">
 					<td th:text="${p.id}"></td>
 					<td th:text="${p.name}"></td>
+					<td>
+						<form th:action="@{/}" method="post" th:object="${searchConditionForm}">
+							<input type="hidden" name="page" th:value="${persons.getNumber()}">
+							<button type="submit" th:formaction="@{/delete}" name="id" th:value="${p.id}">削除</button>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
