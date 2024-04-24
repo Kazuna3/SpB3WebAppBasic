@@ -9,7 +9,8 @@ public class H2Controller {
 	@GetMapping("/")
 	public String handlerMethod() {
 
-		return "redirect:/h2-console";
+		// return "redirect:/h2-console";
+		return "redirect:/list";
 
 	}
 
