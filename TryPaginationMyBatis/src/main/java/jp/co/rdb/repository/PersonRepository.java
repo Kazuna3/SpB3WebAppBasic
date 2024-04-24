@@ -11,8 +11,16 @@ import jp.co.rdb.entity.Person;
 // @Mapper
 public interface PersonRepository {
 
-	Long count();
-
 	public List<Person> selectAll(RowBounds rowBounds);
+
+	public Long selectAllCount();
+
+	public List<Person> findByShimei(RowBounds rowBounds, String shimei);
+
+	public Long findByShimeiCount(String shimei);
+
+	public List<Person> findByShimeiLike(RowBounds rowBounds, String shimei);
+
+	public Long findByShimeiLikeCount(String shimei);
 
 }

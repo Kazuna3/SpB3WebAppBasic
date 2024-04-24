@@ -27,7 +27,43 @@ public class PersonService {
 				pageable.getPageSize());
 
 		List<Person> persons = personRepository.selectAll(rowBounds);
-		Long total = personRepository.count();
+		Long total = personRepository.selectAllCount();
+
+		return new PageImpl<>(persons, pageable, total);
+
+	}
+
+	// @formatter:off
+	public Page<Person> findByShimei(
+			Pageable pageable
+		,	String shimei
+	) {
+	// @formatter:off
+
+		RowBounds rowBounds = new RowBounds(
+				(int) pageable.getOffset(),
+				pageable.getPageSize());
+
+		List<Person> persons = personRepository.findByShimei(rowBounds, shimei);
+		Long total = personRepository.findByShimeiCount(shimei);
+
+		return new PageImpl<>(persons, pageable, total);
+
+	}
+
+	// @formatter:off
+	public Page<Person> findByShimeiLike(
+			Pageable pageable
+		,	String shimei
+	) {
+	// @formatter:off
+
+		RowBounds rowBounds = new RowBounds(
+				(int) pageable.getOffset(),
+				pageable.getPageSize());
+
+		List<Person> persons = personRepository.findByShimeiLike(rowBounds, shimei);
+		Long total = personRepository.findByShimeiLikeCount(shimei);
 
 		return new PageImpl<>(persons, pageable, total);
 

@@ -2,12 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.rdb.repository.PersonRepository">
 
-	<select id="count" resultType="Long">
-		SELECT COUNT(*) FROM person
-	</select>
-
 	<select id="selectAll" resultType="Person">
 		SELECT * FROM person
+	</select>
+
+	<select id="selectAllCount" resultType="Long">
+		SELECT COUNT(id) FROM person
+	</select>
+
+	<select id="findByShimei" parameterType="String" resultType="Person">
+		SELECT * FROM person WHERE name = #{shimei}
+	</select>
+
+	<select id="findByShimeiCount" parameterType="String" resultType="Long">
+		SELECT COUNT(id) FROM person WHERE name = #{shimei}
+	</select>
+
+	<select id="findByShimeiLike" parameterType="String"
+		resultType="Person">
+		<bind name="bindName1" value="'%' + _parameter + '%'" />
+		SELECT
+				id
+			, name
+		FROM
+			person
+		WHERE
+			name LIKE #{bindName1}
+	</select>
+
+	<select id="findByShimeiLikeCount" parameterType="String" resultType="Long">
+		<bind name="bindName1" value="'%' + _parameter + '%'" />
+		SELECT
+			COUNT(id)
+		FROM
+			person
+		WHERE
+			name LIKE #{bindName1}
 	</select>
 
 </mapper>

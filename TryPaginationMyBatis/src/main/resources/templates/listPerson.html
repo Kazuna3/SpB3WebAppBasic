@@ -7,8 +7,17 @@
 <title>listPerson.html</title>
 </head>
 <body>
+	<h4>MyBatis APP</h4>
 	<div>
-		<h4>MyBatis APP</h4>
+		<form th:action="@{/}" method="post" th:object="${searchConditionForm}">
+			<!-- <input type="text" th:field="*{shimei}" size="40" placeholder="名前を入力してください"> -->
+			<!-- <input type="text" name="shimei" size="40" th:value="*{shimei}" placeholder="名前を入力してください"> -->
+			<input type="text" th:field="*{shimei}" size="40" placeholder="名前を入力してください">
+			<button type="submit" th:formaction="@{/search/name}">完全一致検索</button>
+			<button type="submit" th:formaction="@{/search/name/like}">部分一致検索</button>
+		</form>
+	</div>
+	<th:block th:if="0<${persons.getTotalElements()}">
 		<table class="table">
 			<thead>
 				<tr>
@@ -23,22 +32,43 @@
 				</tr>
 			</tbody>
 		</table>
-	</div>
-	<div>
+	</th:block>
+	<th:block th:if="0<${persons.getTotalPages()}">
 		<ul id="nav">
 			<li>
 				<span th:if="${persons.isFirst()}">←前</span>
-				<a th:unless="${persons.isFirst()}" th:href="@{/list(page = ${persons.getNumber() - 1})}">←前</a>
+				<a th:unless="${persons.isFirst()}" th:href="@{/query/person(page = ${persons.getNumber() - 1})}">←前</a>
 			</li>
 			<li th:each="i : ${#numbers.sequence(0, persons.getTotalPages() - 1)}">
 				<span th:if="${i == persons.getNumber()}" th:text="${i + 1}"></span>
-				<a th:unless="${i == persons.getNumber()}" th:href="@{/list(page = ${i})}" th:text="${i + 1}"></a>
+				<a th:unless="${i == persons.getNumber()}" th:href="@{/query/person(page = ${i})}" th:text="${i + 1}"></a>
 			</li>
 			<li>
 				<span th:if="${persons.isLast()}">次→</span>
-				<a th:unless="${persons.isLast()}" th:href="@{/list(page = ${persons.getNumber()+ 1})}">次→</a>
+				<a th:unless="${persons.isLast()}" th:href="@{/query/person(page = ${persons.getNumber()+ 1})}">次→</a>
 			</li>
 		</ul>
+	</th:block>
+	<div>
+		<h1>連携データ情報</h1>
+		<hr>
+		<div>${persons}</div>
+		<div th:text="${persons}">default</div>
+		<hr>
+		<div>${persons.getTotalElements()}</div>
+		<div th:text="${persons.getTotalElements()}">default</div>
+		<hr>
+		<div>${persons.isFirst()}</div>
+		<div th:text="${persons.isFirst()}">default</div>
+		<hr>
+		<div>${persons.getNumber()}</div>
+		<div th:text="${persons.getNumber()}">default</div>
+		<hr>
+		<div>${persons.getTotalPages()}</div>
+		<div th:text="${persons.getTotalPages()}">default</div>
+		<hr>
+		<div>${persons.isLast()}</div>
+		<div th:text="${persons.isLast()}">default</div>
 	</div>
 </body>
 </html>
