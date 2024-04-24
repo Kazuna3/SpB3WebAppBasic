@@ -3,7 +3,11 @@
 <mapper namespace="jp.co.rdb.repository.PersonRepository">
 
 	<select id="selectAll" resultType="Person">
-		SELECT * FROM person
+		SELECT
+				id
+			, name
+		FROM
+			person
 	</select>
 
 	<select id="selectAllCount" resultType="Long">
@@ -11,7 +15,13 @@
 	</select>
 
 	<select id="findByShimei" parameterType="String" resultType="Person">
-		SELECT * FROM person WHERE name = #{shimei}
+		SELECT
+				id
+			, name
+		FROM
+			person
+		WHERE
+			name = #{shimei}
 	</select>
 
 	<select id="findByShimeiCount" parameterType="String" resultType="Long">
@@ -39,5 +49,10 @@
 		WHERE
 			name LIKE #{bindName1}
 	</select>
+	
+	<delete id="deleteById">
+		DELETE FROM person
+		WHERE id = #{id}
+	</delete>
 
 </mapper>
