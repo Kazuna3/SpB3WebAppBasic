@@ -25,4 +25,6 @@ public interface PersonRepository {
 
 	public int deleteById(Integer id);
 
+	int insert(String shimei);
+
 }

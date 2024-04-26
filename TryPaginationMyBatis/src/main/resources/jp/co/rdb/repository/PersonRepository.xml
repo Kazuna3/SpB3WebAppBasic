@@ -55,4 +55,9 @@
 		WHERE id = #{id}
 	</delete>
 
+	<insert id="insert">
+		INSERT INTO person(name)
+		VALUES(#{shimei})
+	</insert>
+
 </mapper>

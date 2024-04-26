@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ja">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<title>formPerson.html</title>
+</head>
+<body>
+	<!--
+	【注意】
+	［th:action="@{/}"］は、仮の指定である。
+	本当の action の指定は、button タグの th:formaction を参照すること。
+	-->
+	<form th:action="@{/}" method="post" th:object="${personForm}">
+		<input type="text" th:field="*{shimei}" size="40" placeholder="氏名を入力してください">
+		<th:block th:if="${#fields.hasErrors('shimei')}">
+			<div th:errors="*{shimei}" th:errorclass="red"></div>
+		</th:block>
+		<button type="submit" th:formaction="@{/insert}">登録</button>
+		<button type="submit" th:formaction="@{/cancel}">キャンセル</button>
+	</form>
+</body>
+</html>

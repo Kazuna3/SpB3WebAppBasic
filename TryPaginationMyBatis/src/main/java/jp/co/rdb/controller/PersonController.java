@@ -6,6 +6,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import jp.co.rdb.entity.Person;
+import jp.co.rdb.form.PersonForm;
 import jp.co.rdb.form.SearchConditionForm;
 import jp.co.rdb.service.PersonService;
 import lombok.RequiredArgsConstructor;
@@ -133,6 +135,46 @@ public class PersonController {
 		model.addAttribute("persons", persons);
 
 		return "listPerson";
+
+	}
+
+	@PostMapping("/insert")
+	public String insert(
+	// @formatter:off
+			@Validated PersonForm personForm
+		,	BindingResult bindingResult
+	// @formatter:on
+	) {
+
+		System.out.println("shimei［" + personForm.getShimei() + "］");
+
+		// エラーチェック
+		boolean isValid = personService.isValid(personForm, bindingResult);
+
+		if (bindingResult.hasErrors() || !isValid) {
+
+			// 入力チェックでエラーを検出した場合の処理
+			System.out.println("◆単項目入力チェックでエラーを検出した！");
+			return "formPerson";
+
+		}
+
+		personService.insert(personForm.getShimei());
+		return "redirect:/list";
+
+	}
+
+	@PostMapping("/cancel")
+	public String cancel() {
+
+		return "redirect:/list";
+
+	}
+
+	@GetMapping("/formPerson")
+	public String formPerson(@ModelAttribute PersonForm personForm) {
+
+		return "formPerson";
 
 	}
 

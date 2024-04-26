@@ -9,14 +9,22 @@
 <body>
 	<h1>MyBatis を用いた Pagination の実現可能性調査</h1>
 	<div>
+		<!--
+		【注意】
+		［th:action="@{/}"］は、仮の指定である。
+		本当の action の指定は、button タグの th:formaction を参照すること。
+		-->
 		<form th:action="@{/}" method="post" th:object="${searchConditionForm}">
-			<!-- <input type="text" th:field="*{shimei}" size="40" placeholder="名前を入力してください"> -->
-			<!-- <input type="text" name="shimei" size="40" th:value="*{shimei}" placeholder="名前を入力してください"> -->
-			<input type="text" th:field="*{shimei}" size="40" placeholder="名前を入力してください">
+			<input type="text" th:field="*{shimei}" size="40" placeholder="氏名を入力してください">
 			<button type="submit" th:formaction="@{/search/name}">完全一致検索</button>
 			<button type="submit" th:formaction="@{/search/name/like}">部分一致検索</button>
 		</form>
 	</div>
+	<hr>
+	<form th:action="@{/}" method="get">
+		<button type="submit" th:formaction="@{/formPerson}">新規追加</button>
+	</form>
+	<hr>
 	<th:block th:if="0<${persons.getTotalElements()}">
 		<table class="table">
 			<thead>
